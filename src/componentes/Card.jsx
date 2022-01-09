@@ -7,6 +7,7 @@ class Card extends Component {
         this.tarjetaname=props.nombretarjeta//"Tarjeta";
         this.tarjetadescripcion=props.descripciontarjeta
     }
+    
     render(){     
         return(      
             <div class="card" style={{width:18 +'rem'}} >

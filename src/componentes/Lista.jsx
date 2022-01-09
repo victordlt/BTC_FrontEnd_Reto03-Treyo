@@ -1,31 +1,71 @@
 import React, {Component} from "react";
+import {connect} from 'react-redux';
+
 import  Card  from './Card';
 
 class Lista extends Component {
     constructor(props){
         super(props);
-        this.nombrelista="Listas";
+        this.nombrelista=props.nombre;
+        this.id=this.props.id;
     }
 
-    insertcard(i){
-        //document.getElementById("Lista").appendChild(<p>"Hi"</p>)
-        /*'<span> Graph</span>'*/
-        
-        return <Card/>;
-        // console.log ("hola mundo")
+    insertcard(e){
+        const listidactual= (this.id);
+        console.log("la lista seleccionada es: "+listidactual);
+        this.props.actuallistid(listidactual);
     }
 
-
-    render(){       
+    render(){
+        // const sen;
+        // if (true){
+        //     sen=true;
+        // }
+        // else{sen=false}
         return(
-            <div class="col" id={this.nombrelista}>
+            <div class="col" style={{marginBottom:35+'px'}}>
                 <div style={{width:18 +'rem'}}>
                     <h3 style={{display:'inline'}}>{this.nombrelista}</h3>
-                    <button style={{display:'inline', float:'right'}} type="button" class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" onClick={this.insertcard}>+</button>
+                    <button style={{display:'inline', float:'right'}} type="button" class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#nuevatarea" data-bs-whatever="@mdo" onClick={(e)=>this.insertcard()}>+</button>
                 </div>
-                <div id="vic">{this.insertcard(0)}</div>
+                <div>  
+                    {
+                        //  (this.props.listas.find(lista=>lista.id==this.id)).tareas.map((tarea)=>(<Card nombretarjeta={tarea.titulo} descripciontarjeta={tarea.descripcion}/>))
+                        
+                         (this.props.listas.find(lista=>lista.id==this.id)).tareas.map((tarea)=>(<Card nombretarjeta={tarea.titulo} descripciontarjeta={tarea.descripcion}/>))
+
+
+                        // this.props.listas.map(
+                        //     (listac)=>{
+                        //            if(listac.id==this.id){
+                        //                 console.log("well done"+this.id) ;  
+                        //                 listac.tareas.map((tarea)=>{
+                        //                     console.log("la tarea es"+tarea.id);
+                        //                     <Card nombretarjeta={tarea.titulo} descripciontarjeta={tarea.descripcion}/>
+                        //                 })
+                        //            }
+                        //     }
+                        // )
+                    }                          
+                </div>
             </div>
         )
     }
 }
-export default Lista;
+
+const mapStateToProps = (state) =>  ({
+    listas:state.listas,
+});
+
+const mapDispatchToProps=(dispatch)=>({
+    actuallistid:(texto)=>{
+        console.log("Dispatch_ActualListId: "+texto);
+        dispatch({
+            type:'ACT_LISTID',
+            payload:texto
+        });
+    }
+})
+
+const connected = connect(mapStateToProps,mapDispatchToProps)(Lista)
+export default connected;
