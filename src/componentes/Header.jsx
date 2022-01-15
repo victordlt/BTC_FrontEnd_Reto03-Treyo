@@ -9,12 +9,12 @@ class Header extends Component {
         return(      
             <div class="row">
                 <div class="col">
-                        <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+                        {/* <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
                             <div class="input-group">
                                 <button class="input-group-text" id="btnGroupAddon">Buscar</button>
                                 <input type="text" class="form-control" placeholder="...lista" aria-label="Input group example" aria-describedby="btnGroupAddon"></input>
                             </div>
-                        </div>
+                        </div> */}
                 </div>
                 <div class="col">
                     <h3 class="d-flex justify-content-center">TREYO</h3>
